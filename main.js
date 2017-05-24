@@ -1,11 +1,34 @@
+function newGame() {
+  dealerCards = [];
+  playerCards = [];
+  dealtCards = [];
+  // deckArray = [];
+  // shuffle();
+  deck = buildDeck();
+  shuffle();
+  $('#messages').text("")
+  $('#deal-button').show();
+  $('#hit-button').show();
+  $('#stand-button').show();
+  $('#dealer-hand').empty();
+  $('#player-hand').empty();
+  $('#player-points').empty();
+  $("#dealer-points").empty();
+  console.log('count', shuffled_deck.length);
+}
+
+
 var deck;
 var shuffled_deck;
 var playerCardsValue;
 var dealerCardsValue;
 
 // deck building function
-var deckArray = []
+var deckArray = [];
+
 function buildDeck() {
+  deckArray = [];
+  shuffled_deck = [];
   var label = ['2','3','4','5','6','7','8','9','10','jack','queen','king','ace'];
   var suit = ['clubs','spades','diamonds','hearts'];
   label.forEach(function(label) {
@@ -14,6 +37,7 @@ function buildDeck() {
     });
   });
   return deckArray;
+
 }
 // shuffle the deck
 
@@ -29,6 +53,8 @@ function shuffle() {
   shuffled_deck.push(card);
   if (deck.length > 0) {
     shuffle();
+    // console.log(card);
+    // console.log("shuffled_deck", shuffled_deck);
   }
 }
 
@@ -56,9 +82,11 @@ function dealACard(player) {
       }
       playerCardsValue = calculatePoints(playerCards);
       dealerCardsValue = calculatePoints(dealerCards);
+      // console.log("nezt card??", nextCard);
 }
 
 // deal function
+
 $('#deal-button').click(function() {
   dealACard('dealer');
   dealACard('player');
@@ -77,12 +105,6 @@ $('#player-points').text(playerCardsValue);
 bust();
 });
 
-// new game
-$('#newgame-button').click(function() {
-    shuffle();
-    $('#deal-button').show();
-    $('#hit-button').show();
-});
 
 function calculatePoints(cardHand) {
     var total = 0;
@@ -92,9 +114,9 @@ function calculatePoints(cardHand) {
     if (isNaN(value)) {
       if (cardHand[i].label == 'ace') {
         value = 11;
-        $('#' + player + '-hand').attr('val', function(n,v) {
-          return v += 'a';
-      });
+      //   $('#' + player + '-hand').attr('value', function(n, v) {
+      //     return v += 'ace';
+      // });
     }
     else {
       value = 10;
@@ -106,19 +128,22 @@ function calculatePoints(cardHand) {
   return total;
 }
 
+//ace
 // check for busts
 
 function bust() {
   if (playerCardsValue > 21) {
     $('#messages').text("Bust! Dealer wins!");
+    $("#hit-button, #stand-button").hide();
   }
   else if (dealerCardsValue > 21) {
     $('#messages').text("Dealer busted! You win!");
+    $("#hit-button, #stand-button").hide();
   }
-  
+
 }
 
-//player stands
+//stand
 
 $('#stand-button').click(function() {
 $('#hit-button').hide();
@@ -127,15 +152,38 @@ while (dealerCardsValue <= 17)
   dealACard('dealer');
   dealerCardsValue;
 }
+//determine winner
 if (dealerCardsValue > 21) {
   $('#messages').text("Dealer busted! You win!")
+  $('#dealer-points').text(dealerCardsValue);
 }
 else if (dealerCardsValue > playerCardsValue) {
   $('#messages').text("Dealer wins!")
+  $('#dealer-points').text(dealerCardsValue);
 }
 else {
   $('#messages').text("You win!")
 }
 });
 
-//determine winner
+//
+// new game
+$('#newgame-button').click(function () {
+    newGame()
+  });
+
+// $('document').ready(function() {
+//   $('#deal-button').click(function() {
+//     dealACard('dealer');
+//     dealACard('player');
+//     dealACard('dealer');
+//     dealACard('player');
+//     $(this).hide();
+//     $('#player-points').text(playerCardsValue);
+//     $('#dealer-points').text(dealerCardsValue);
+//     bust();
+//   });
+//   $('#newgame-button').click(function () {
+//     newGame()
+//   });
+// });
