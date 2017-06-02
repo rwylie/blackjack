@@ -1,30 +1,39 @@
 body {
   font-family: "Helvetica Neue", sans-serif;
   background-color: #C4C029;
+  padding: 3px;
+  margin: 5px;
 }
 
 * {
   box-sizing: border-box;
 }
-h1, label {
+label, h1 {
   font-family: 'Dancing Script', cursive;
   text-align: center;
   color: white;
   font-size: 30px;
 }
+
 #table {
-  padding: 10px 50px;
+  padding: 0 5px 5px 5px;
   border: 3px dotted #EDEDED;
-  border-radius: 100px;
   background: #F8A69E;
+  margin-top: 0;
+}
+#hand {
+  width: 55%;
+  margin: auto;
+  padding-top: 0;
+  padding-bottom: 10px;
 }
 
 .hand {
-  padding: 10px;
+  padding: 5px;
   border-radius: 3px;
-  height: 150px;
+  height: 132px;
   background: #84C49A;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .hand label {
@@ -40,9 +49,9 @@ h1, label {
 }
 
 #messages {
-  font-size: 1.5em;
+  color: white;
+  font-size: 1.2em;
   text-align: center;
-  margin-bottom: 5px;
   height: 2em;
 }
 
@@ -53,10 +62,11 @@ h1, label {
 .buttons button {
   border: 3px solid white;
   border-radius: 5px;
-  background: linear-gradient(#eee, #ccc);
+  background: #C4C029;
   font-size: 1em;
   font-family: 'Dancing Script', cursive;
   padding: 5px 10px;
+  color: grey;
 
 }
 
@@ -70,10 +80,15 @@ h1, label {
 
 .buttons button:active {
   color: white;
-  background: linear-gradient(#666, #222);
+  background: #C4C029;
   border: 1px solid black;
 }
 
 .card {
   height: 100%;
 }
+
+@media screen and (max-width: 680px) {
+    #hand {
+        width: 90%;
+    }
